@@ -48,18 +48,6 @@ Cupón de prueba en el checkout: `BLACK10` (10% de descuento).
 - **Navbar minimalista** a todo el ancho. El fondo y el desenfoque aumentan a medida que bajas. Tiene el mismo menú del sitio original (Categorías, PS5, PS4, PS3, Xbox, Nintendo, Membresías, Packs, Opiniones y Colecciones), con desplegables y un megamenú.
 - **Liquid glass** solo en tarjetas y paneles flotantes. El checkout y los menús usan superficies sólidas para transmitir claridad y confianza.
 
-## Imágenes reales (opcional)
-
-- **Carátulas:** guárdalas en `public/covers/` con el nombre del producto, por ejemplo `spider-man-2-ps5.jpg`. La lista completa de nombres está en `public/covers/LEEME.txt`.
-- **Consolas:** guárdalas en `public/consoles/` como `ps5.png`, `ps4.png`, `ps3.png`, `xbox.png` y `switch.png`, ojalá con fondo transparente.
-- Se aceptan .jpg, .webp, .png y .jpeg. Después de agregar imágenes, reinicia `npm run dev` (o corre `npm run images`) para que las detecte. Si falta alguna, se usa automáticamente la portada generativa.
-
 ## Stack
 
 Next.js 15 (App Router), React 19, Tailwind CSS 4, Framer Motion e iconos Lucide.
-
-## Publicar en Vercel
-
-1. Sube la carpeta a un repositorio de GitHub.
-2. Impórtalo en vercel.com (detecta Next.js solo).
-3. En Settings → Deployment Protection, activa Vercel Authentication para dejarlo privado.

@@ -307,7 +307,7 @@ export default function Home() {
 
       {/* ---------------- Recomendados ---------------- */}
       <section className="mt-20">
-        <Reveal>
+        <Reveal className="relative z-30">
           <SectionTitle
             eyebrow={user?.platform ? "Recomendado para ti" : "Lo más vendido"}
             icon={user?.platform ? <Sparkles className="size-3.5 text-brand" /> : <Trophy className="size-3.5 text-brand" />}
@@ -507,9 +507,9 @@ function RecInfo() {
             initial={{ opacity: 0, y: -6, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.97 }}
-            className="lg lg-strong absolute right-0 top-10 z-30 w-80 rounded-2xl p-4"
+            className="solid absolute right-0 top-10 z-50 w-80 rounded-2xl p-4 shadow-2xl"
           >
-            <div className="relative z-[2]">
+            <div>
               <div className="flex items-center justify-between">
                 <p className="text-sm font-semibold text-white">Motor híbrido</p>
                 <button onClick={() => setOpen(false)} aria-label="Cerrar" className="text-white/50 hover:text-white">

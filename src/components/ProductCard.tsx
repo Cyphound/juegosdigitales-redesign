@@ -54,7 +54,7 @@ export function ProductCard({
           mx.set(0.5);
           my.set(0.5);
         }}
-        style={{ rotateX: rx, rotateY: ry, transformStyle: "preserve-3d" }}
+        style={{ rotateX: rx, rotateY: ry }}
         whileHover={{ y: -6 }}
         transition={{ type: "spring", stiffness: 260, damping: 20 }}
         className="lg rounded-[22px] p-2"
