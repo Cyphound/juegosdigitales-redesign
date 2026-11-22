@@ -1,0 +1,282 @@
+@import "tailwindcss";
+
+/*
+  Paleta: armonía ANÁLOGA azul → violeta → magenta (≈215° → 255° → 320° en el círculo cromático).
+  - brand (violeta)  : acciones principales (comprar, pagar, seleccionar)
+  - brand-2 (magenta): acento secundario, solo en degradados y destacados
+  - plataformas      : código semántico (PS5 azul, PS4 celeste, PS3 grafito, Xbox verde, Nintendo rojo)
+  Tema: "white" = color de primer plano y "black" = color de fondo, así cada utilidad se invierte sola en modo claro.
+*/
+
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --color-brand: #8467ff;
+  --color-brand-2: #e05ad1;
+  --color-brand-ink: #ffffff;
+  --color-ink: #09090f;
+}
+
+:root {
+  --plat: #8467ff;
+  --bg: #09090f;
+  --surface: #111118;
+  --surface-2: #17171f;
+  --hair: rgba(255, 255, 255, 0.08);
+  --fg: #ececf3;
+  --nav-bg: 9, 9, 15;
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
+  --color-white: #14141c;
+  --color-black: #ffffff;
+  --color-brand: #6a4cf0;
+  --color-brand-2: #c23cb4;
+  --bg: #f4f4f8;
+  --surface: #ffffff;
+  --surface-2: #fafafd;
+  --hair: rgba(20, 20, 40, 0.09);
+  --fg: #14141c;
+  --nav-bg: 244, 244, 248;
+  color-scheme: light;
+}
+
+html {
+  background: var(--bg);
+  transition: background-color 0.5s ease;
+}
+
+body {
+  background: transparent; /* el fondo lo pinta <html> para que el canvas y la aurora queden visibles */
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-brand) 35%, transparent);
+}
+
+@layer components {
+  /* ---------- Liquid glass ---------- */
+  .lg {
+    position: relative;
+    isolation: isolate;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.04) 55%,
+      rgba(255, 255, 255, 0.055) 100%
+    );
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    backdrop-filter: blur(22px) saturate(180%);
+    box-shadow:
+      inset 0 1px 0.5px rgba(255, 255, 255, 0.38),
+      inset 0 -1px 1px rgba(255, 255, 255, 0.06),
+      inset 0 0 18px rgba(255, 255, 255, 0.03),
+      0 18px 50px -18px rgba(0, 0, 0, 0.75);
+  }
+  .lg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      140deg,
+      rgba(255, 255, 255, 0.5) 0%,
+      rgba(255, 255, 255, 0.07) 28%,
+      rgba(255, 255, 255, 0.02) 55%,
+      rgba(255, 255, 255, 0.26) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .lg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, -40%),
+      color-mix(in srgb, var(--color-brand) 16%, transparent),
+      transparent 45%
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .lg:hover::after {
+    opacity: 1;
+  }
+  .lg-strong {
+    background: linear-gradient(180deg, rgba(23, 23, 32, 0.8), rgba(13, 13, 19, 0.85));
+  }
+
+  html[data-theme="light"] .lg {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.55) 100%);
+    box-shadow:
+      inset 0 1px 0.5px rgba(255, 255, 255, 1),
+      inset 0 -1px 1px rgba(255, 255, 255, 0.6),
+      0 1px 2px rgba(20, 16, 60, 0.05),
+      0 18px 44px -22px rgba(40, 24, 120, 0.28);
+  }
+  html[data-theme="light"] .lg::before {
+    background: linear-gradient(
+      140deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(30, 20, 80, 0.08) 35%,
+      rgba(30, 20, 80, 0.05) 65%,
+      rgba(255, 255, 255, 0.9) 100%
+    );
+  }
+  html[data-theme="light"] .lg-strong {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(250, 250, 253, 0.92));
+  }
+
+  /* superficie sólida y sobria (checkout, menús) */
+  .solid {
+    background: var(--surface);
+    border: 1px solid var(--hair);
+  }
+  html[data-theme="light"] .solid {
+    box-shadow: 0 1px 2px rgba(20, 16, 60, 0.04), 0 12px 32px -20px rgba(20, 16, 60, 0.18);
+  }
+
+  /* ---------- Fondo ambiental ---------- */
+  .aurora {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .aurora .blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(90px);
+    will-change: transform;
+    transition: background 1.2s ease, opacity 0.6s ease;
+  }
+  .aurora .b1 {
+    width: 46vw;
+    height: 46vw;
+    left: -10vw;
+    top: -14vw;
+    background: var(--plat);
+    opacity: 0.26;
+    animation: drift1 22s ease-in-out infinite alternate;
+  }
+  .aurora .b2 {
+    width: 38vw;
+    height: 38vw;
+    right: -8vw;
+    top: 18vh;
+    background: var(--color-brand-2);
+    opacity: 0.16;
+    animation: drift2 26s ease-in-out infinite alternate;
+  }
+  .aurora .b3 {
+    width: 34vw;
+    height: 34vw;
+    left: 28vw;
+    bottom: -18vw;
+    background: #3b6cf6;
+    opacity: 0.16;
+    animation: drift3 30s ease-in-out infinite alternate;
+  }
+  html[data-theme="light"] .aurora .b1 {
+    opacity: 0.16;
+  }
+  html[data-theme="light"] .aurora .b2,
+  html[data-theme="light"] .aurora .b3 {
+    opacity: 0.1;
+  }
+  .aurora .grain {
+    position: absolute;
+    inset: -50%;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .aurora .grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--hair) 1px, transparent 1px),
+      linear-gradient(90deg, var(--hair) 1px, transparent 1px);
+    background-size: 64px 64px;
+    opacity: 0.35;
+    mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
+  }
+}
+
+@keyframes drift1 {
+  to {
+    transform: translate(12vw, 10vh) scale(1.15);
+  }
+}
+@keyframes drift2 {
+  to {
+    transform: translate(-10vw, 14vh) scale(0.9);
+  }
+}
+@keyframes drift3 {
+  to {
+    transform: translate(8vw, -12vh) scale(1.1);
+  }
+}
+
+/* ---------- Utilidades ---------- */
+.text-balance {
+  text-wrap: balance;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.shine {
+  background: linear-gradient(
+    110deg,
+    var(--color-brand) 0%,
+    var(--color-brand-2) 35%,
+    #4f7dff 65%,
+    var(--color-brand) 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 8s linear infinite;
+}
+@keyframes shine {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -150% 0;
+  }
+}
+.bg-brand-gradient {
+  background-image: linear-gradient(120deg, var(--color-brand), color-mix(in srgb, var(--color-brand) 55%, var(--color-brand-2)));
+}
+.glow-brand {
+  box-shadow: 0 10px 36px -12px color-mix(in srgb, var(--color-brand) 70%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora .blob,
+  .shine {
+    animation: none;
+  }
+}

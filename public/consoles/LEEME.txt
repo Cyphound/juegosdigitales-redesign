@@ -1,0 +1,12 @@
+IMÁGENES DE CONSOLAS
+====================
+
+Guarda una imagen por consola con estos nombres (de preferencia PNG con fondo transparente):
+
+ps5.png       PlayStation 5
+ps4.png       PlayStation 4
+ps3.png       PlayStation 3
+xbox.png      Xbox Series X|S
+switch.png    Nintendo Switch
+
+Aparecen en las tarjetas de plataforma del inicio. Si falta alguna, la tarjeta se ve igual sin imagen.
